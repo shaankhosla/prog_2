@@ -9,7 +9,7 @@ COLORS = ["grey", "blue", "green", "purple", "pink"]
 
 
 def create_data(centers, std):
-    X, y = make_blobs(n_samples=100, centers=centers, cluster_std=std)
+    X, y = make_blobs(n_samples=5000, centers=centers, cluster_std=std)
     plt.scatter(X[:, 0], X[:, 1])
     plt.show()
     return X
@@ -65,10 +65,12 @@ def run_kmeans(X, num_clusters=3):
     anim = camera.animate(blit=True)
     anim.save("animation.mp4")
     plt.clf()
+    print("Iterations: ", ct)
+    return ct
 
 
 def main():
-    X = create_data(2, 2.5)
+    X = create_data(4, 3.5)
     run_kmeans(X)
 
 
