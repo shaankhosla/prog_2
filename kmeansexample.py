@@ -53,4 +53,3 @@ plt.plot(third[:, 0], third[:, 1], 'bo')
 '''
 
 plt.show()
-
