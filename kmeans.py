@@ -46,9 +46,10 @@ def run_kmeans(X, num_clusters=3):
     index = find_clusters(X, centroids)
     (ct, camera) = (0, Camera(plt.figure()))
 
-    plt.scatter(X[:, 0], X[:, 1], c=index, cmap=mp.colors.ListedColormap(COLORS))
-    plt.scatter(centroids[:, 0], centroids[:, 1], color="r")
-    camera.snap()
+    for i in range(3):  # slows down the mp4 video
+        plt.scatter(X[:, 0], X[:, 1], c=index, cmap=mp.colors.ListedColormap(COLORS))
+        plt.scatter(centroids[:, 0], centroids[:, 1], color="r")
+        camera.snap()
 
     while(True):
         ct += 1
@@ -58,9 +59,11 @@ def run_kmeans(X, num_clusters=3):
             break
         index = find_clusters(X, centroids)
 
-        plt.scatter(X[:, 0], X[:, 1], c=index, cmap=mp.colors.ListedColormap(COLORS))
-        plt.scatter(centroids[:, 0], centroids[:, 1], color="r")
-        camera.snap()
+        for i in range(3):  # slows down the mp4 video
+            plt.scatter(X[:, 0], X[:, 1], c=index, cmap=mp.colors.ListedColormap(COLORS))
+            plt.scatter(centroids[:, 0], centroids[:, 1], color="r")
+            camera.snap()
+
 
     anim = camera.animate(blit=True)
     anim.save("animation.mp4")
@@ -70,7 +73,7 @@ def run_kmeans(X, num_clusters=3):
 
 
 def main():
-    X = create_data(4, 3.5)
+    X = create_data(4, 2.5)
     run_kmeans(X)
 
 
