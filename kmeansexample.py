@@ -23,6 +23,14 @@ for i in range(SAMPLE_COUNT):
     data[i] = np.random.multivariate_normal(trueMeans[randomCluster], trueCovs[randomCluster], 1)
     trueAssigns[i] = randomCluster
 
+plt.plot(data[:, 0], data[:, 1], 'ro')
+
+plt.plot(means[0, 0], means[0, 1], 'rx', markersize = 18)
+plt.plot(means[1, 0], means[1, 1], 'gx', markersize = 18)
+plt.plot(means[2, 0], means[2, 1], 'bx', markersize = 18)
+
+plt.pause(1.0)
+
 for i in range(ITERATION_COUNT):
     dists = np.sum((data[:, :, np.newaxis] - means.transpose()) ** 2.0, axis = 1)
     assigns = np.argsort(dists, axis = 1)[:, 0]
@@ -42,7 +50,10 @@ for i in range(ITERATION_COUNT):
     plt.pause(1.0)
 
     for j in range(MEAN_COUNT):
-        means[j, :] = np.mean(data[np.where(assigns == j)], axis = 0)
+        dataFromCluster = data[np.where(assigns == j)]
+        
+        if dataFromCluster.shape[0] > 0:
+            means[j, :] = np.mean(dataFromCluster, axis = 0)
 
     plt.clf()
 
